@@ -12,6 +12,7 @@ if st.button("영상 다운로드 시작"):
 
     if youtube_url == "":
         st.warning("유튜브 링크를 입력하세요.")
+
     else:
 
         output_path = "downloads"
@@ -20,8 +21,8 @@ if st.button("영상 다운로드 시작"):
             os.makedirs(output_path)
 
         ydl_opts = {
-            'outtmpl': f'{output_path}/%(title)s.%(ext)s',
-            'format': 'mp4'
+            'format': 'mp4',
+            'outtmpl': f'{output_path}/%(title)s.%(ext)s'
         }
 
         try:
