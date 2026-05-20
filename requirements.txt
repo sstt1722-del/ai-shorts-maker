@@ -1,2 +1,6 @@
 streamlit
-yt-dlp
+moviepy==1.0.3
+imageio
+imageio-ffmpeg
+numpy
+pillow
