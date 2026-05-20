@@ -149,7 +149,9 @@ if st.button("✂️ Generate Shorts", type="primary", use_container_width=True)
 
     with tempfile.TemporaryDirectory() as tmpdir:
         input_path = os.path.join(tmpdir, "input.mp4")
-      if uploaded_file:
+   if uploaded_file or youtube_url:
+       if youtube_url:
+    video_path = download_youtube(youtube_url)
     with open(input_path, "wb") as f:
         f.write(uploaded_file.read())
 
