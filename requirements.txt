@@ -4,3 +4,4 @@ imageio
 imageio-ffmpeg
 numpy
 pillow
+yt-dlp
