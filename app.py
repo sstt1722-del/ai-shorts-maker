@@ -1,4 +1,5 @@
 import streamlit as st
+import yt_dlp
 import tempfile
 import os
 import subprocess
@@ -125,6 +126,8 @@ def create_short(input_path, start, output_path, top_text, bottom_text, font_pat
 st.set_page_config(page_title="AI Shorts Maker", page_icon="🎬", layout="centered")
 st.title("🎬 AI Shorts Maker")
 st.caption("Upload an MP4 — the app finds the 3 loudest moments and creates vertical 9:16 shorts with Korean captions.")
+
+youtube_url = st.text_input("YouTube URL")
 
 uploaded_file = st.file_uploader("Upload MP4 Video", type=["mp4"])
 
