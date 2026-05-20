@@ -12,6 +12,14 @@ KOREAN_HOOK_CAPTIONS = [
     "이 순간이 핵심임",
 ]
 BOTTOM_CAPTION = "끝까지 보면 이해됨"
+def download_youtube(url, output_path):
+    ydl_opts = {
+        "format": "mp4",
+        "outtmpl": output_path,
+    }
+
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
 TARGET_W, TARGET_H = 720, 1280
 CLIP_DURATION = 15
 
@@ -131,7 +139,7 @@ youtube_url = st.text_input("YouTube URL")
 
 uploaded_file = st.file_uploader("Upload MP4 Video", type=["mp4"])
 
-if not uploaded_file:
+if not uploaded_file and not youtube_url:
     st.stop()
 
 st.success(f"Uploaded: **{uploaded_file.name}**")
@@ -141,8 +149,13 @@ if st.button("✂️ Generate Shorts", type="primary", use_container_width=True)
 
     with tempfile.TemporaryDirectory() as tmpdir:
         input_path = os.path.join(tmpdir, "input.mp4")
-        with open(input_path, "wb") as f:
-            f.write(uploaded_file.read())
+      if uploaded_file:
+    with open(input_path, "wb") as f:
+        f.write(uploaded_file.read())
+
+elif youtube_url:
+    st.info("Downloading YouTube video...")
+    download_youtube(youtube_url, input_path)
 
         with st.spinner("🔊 Analyzing audio…"):
             peaks = analyze_peaks(input_path)
